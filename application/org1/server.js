@@ -21,7 +21,7 @@ app.post('/api/minter', async function (req, res) {
     try {
         const username = req.body.id
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -65,7 +65,7 @@ app.get('/api/test', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -109,7 +109,7 @@ app.post('/api/Burn', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -152,9 +152,9 @@ app.post('/api/Transfer', async function (req, res) {
 
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
-        const username = req.body.to
+        const username = req.body.id
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -174,7 +174,7 @@ app.post('/api/Transfer', async function (req, res) {
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('erc20');
 
-        const result = await contract.evaluateTransaction('Transfer', req.body.from, req.body._value); //
+        const result = await contract.submitTransaction('Transfer', req.body.to, req.body._value); //
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
 
@@ -197,15 +197,15 @@ app.post('/api/BalanceOf', async function (req, res) {
 
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
-
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const username = req.body.id
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
             
-        const identity = await wallet.get('appUser');
+        const identity = await wallet.get(username);
         if (!identity) {
             console.log('An identity for the user "appUser" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
@@ -213,12 +213,12 @@ app.post('/api/BalanceOf', async function (req, res) {
         }
         
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true, asLocalhost: true } });
+        await gateway.connect(ccp, { wallet, identity: username, discovery: { enabled: true, asLocalhost: true } });
         
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('erc20');
 
-        const result = await contract.submitTransaction('BalanceOf'); //
+        const result = await contract.submitTransaction('BalanceOf', req.body.account); //
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
 
@@ -242,7 +242,7 @@ app.post('/api/ClientAccountBalance', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
         const username = req.body.id
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -287,7 +287,7 @@ app.post('/api/ClientAccountID', async function (req, res) {
     try {
         const username = req.body.id
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -330,15 +330,16 @@ app.post('/api/TotalSupply', async function (req, res) {
 
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
+        const username = req.body.id
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
             
-        const identity = await wallet.get('appUser');
+        const identity = await wallet.get(username);
         if (!identity) {
             console.log('An identity for the user "appUser" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
@@ -346,12 +347,12 @@ app.post('/api/TotalSupply', async function (req, res) {
         }
         
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true, asLocalhost: true } });
+        await gateway.connect(ccp, { wallet, identity: username, discovery: { enabled: true, asLocalhost: true } });
         
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('erc20');
 
-        const result = await contract.evaluateTransaction('TotalSupply', req.body.value); //
+        const result = await contract.evaluateTransaction('TotalSupply'); //
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
 
@@ -375,7 +376,7 @@ app.post('/api/Approve', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -419,7 +420,7 @@ app.post('/api/Allowance', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -462,15 +463,15 @@ app.post('/api/TransferFrom', async function (req, res) {
 
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
-
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const username = req.body.id
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
             
-        const identity = await wallet.get('appUser');
+        const identity = await wallet.get(username);
         if (!identity) {
             console.log('An identity for the user "appUser" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
@@ -478,12 +479,12 @@ app.post('/api/TransferFrom', async function (req, res) {
         }
         
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true, asLocalhost: true } });
+        await gateway.connect(ccp, { wallet, identity: username, discovery: { enabled: true, asLocalhost: true } });
         
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('erc20');
 
-        const result = await contract.evaluateTransaction('TransferFrom'); //
+        const result = await contract.evaluateTransaction('TransferFrom', req.body.from ,req.body.to, req.body.value); //
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
 
@@ -512,7 +513,7 @@ app.post('/api/register', async function (req, res) {
         }
 
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new CA client for interacting with the CA.
@@ -571,5 +572,5 @@ app.post('/api/register', async function (req, res) {
     }
 });
 
-app.listen(3100, '0.0.0.0');
+app.listen(8100, '0.0.0.0');
 console.log('Running on api server');

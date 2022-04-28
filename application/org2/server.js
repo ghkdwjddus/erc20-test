@@ -20,7 +20,7 @@ const fs = require('fs'); // 파일 처리 모듈입니다. ( read, write )
 //     // 만약 코드에서 에러가 난 경우 예외 처리
 //     try {
 //         const username = req.body.id
-//         const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+//         const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
 //         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
 //         const walletPath = path.join(process.cwd(), 'wallet');
@@ -64,7 +64,7 @@ app.get('/api/test', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -108,7 +108,7 @@ app.post('/api/Burn', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -152,7 +152,7 @@ app.post('/api/Transfer', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
         const username = req.body.id
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -172,7 +172,7 @@ app.post('/api/Transfer', async function (req, res) {
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('erc20');
 
-        const result = await contract.evaluateTransaction('Transfer', req.body.to, req.body._value); //
+        const result = await contract.submitTransaction('Transfer', req.body.to, req.body._value); //
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
         res.status(200).json({response: result.toString()});
 
@@ -196,7 +196,7 @@ app.post('/api/BalanceOf', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -240,7 +240,7 @@ app.post('/api/ClientAccountBalance', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
         const username = req.body.id
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -285,7 +285,7 @@ app.post('/api/ClientAccountID', async function (req, res) {
     try {
         const username = req.body.id
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -329,7 +329,7 @@ app.post('/api/TotalSupply', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -373,7 +373,7 @@ app.post('/api/Approve', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -417,7 +417,7 @@ app.post('/api/Allowance', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -461,7 +461,7 @@ app.post('/api/TransferFrom', async function (req, res) {
     // 만약 코드에서 에러가 난 경우 예외 처리
     try {
 
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
             
         const walletPath = path.join(process.cwd(), 'wallet');
@@ -510,7 +510,7 @@ app.post('/api/register', async function (req, res) {
         }
 
         // load the network configuration
-        const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+        const ccpPath = path.resolve(__dirname, '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new CA client for interacting with the CA.
@@ -569,5 +569,5 @@ app.post('/api/register', async function (req, res) {
     }
 });
 
-app.listen(3000, '0.0.0.0');
+app.listen(8000, '0.0.0.0');
 console.log('Running on api server');
